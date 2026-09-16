@@ -165,6 +165,7 @@ tools/
   bundle.ps1                Builds the single-file release
   align-check.ps1           Draws the CSS boxes onto the background to check alignment
   sync-assets.ps1           Syncs 图片素材/ into assets/
+  sync-repo.ps1             Mirrors the build into the git working copy
 ```
 
 **两个版本的区别 · Two builds**
@@ -188,6 +189,7 @@ tools/
 - **3D 骰子翻滚 · 3D dice tumble** — `perspective` plus random three-axis `rotateX/Y/Z`,
   with squash-and-stretch on landing to sell the weight.
 - **粒子攻击 · Particle attack** — 20 independent particles with randomised offsets and delays.
+- **黑边填充** — 舞台锁定 16:9；视口不是 16:9 时，一层全屏背景用「当前画面的底图」模糊压暗铺满，黑边变成美术的自然延伸。`#bleed` 在每次切画面时重新指向对应底图。
 - **无障碍 · Accessibility** — respects `prefers-reduced-motion`; all animation is disabled
   when the OS "reduce motion" setting is on.
 

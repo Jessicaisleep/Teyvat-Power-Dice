@@ -601,10 +601,17 @@ h1{font-family:var(--font-title);font-size:2.6cqh;margin:0 0 .2cqh;text-align:ce
 #roster .cxCard:hover{border-color:var(--gold);transform:translateY(-2px);
   box-shadow:0 0 2.4cqh rgba(245,199,74,.4)}
 #roster .cxCard:active{transform:translateY(0)}
+/* ---------------------------------------------------------------------
+   闈?16:9 瑙嗗彛浼氬湪鑸炲彴涓や晶鐣欓粦杈广€傝繖涓€灞傜敤銆屽綋鍓嶇敾闈㈢殑鑳屾櫙銆嶆ā绯婃斁澶у悗
+   閾烘弧鏁翠釜瑙嗗彛锛岄粦杈瑰氨鍙樻垚浜嗗悓涓€寮犵編鏈殑铏氬寲寤朵几锛屽竷灞€瀹屽叏涓嶅彈褰卞搷銆?   --------------------------------------------------------------------- */
+#bleed{position:fixed;inset:-6%;z-index:0;
+  background:#05070e center/cover no-repeat;
+  filter:blur(26px) brightness(.34) saturate(.72)}
+#app{z-index:1}
 </style>
 </head>
 <body>
-<div id="app">
+<div id="bleed"></div>
 
 <!-- ============ 入口 ============ -->
 <section class="screen on" id="s-menu">
@@ -850,16 +857,22 @@ function avaInner(id){
 }
 
 /* 鐮寸紦瀛橈細姣忔杞藉叆閮藉甫鏃堕棿鎴筹紝鏀瑰畬绱犳潗鍒锋柊鍗冲彲鐪嬪埌锛屼笉蹇呴噸鏂版瀯寤?*/
+/* 每张图的路径只在这里写一次：打包时按字面量替换为 base64，
+   写两遍就会把同一张图内联两遍（单文件体积翻倍）。 */
+const PATH = {
+  menu:'assets/bg-menu.jpg', start:'assets/bg-start.jpg',
+  coin:'assets/bg-coin2.png', board:'assets/bg-board.png', ace:'assets/die-ace.png',
+};
 const ASSET_V = '?v=' + Date.now();
 const asset = p => (p.startsWith('data:') ? p : p + ASSET_V);
 if (typeof document !== 'undefined') document.addEventListener('DOMContentLoaded', () => {
   document.head.insertAdjacentHTML('beforeend',
     '<style>' +
-    ".menuWrap{background:url('" + asset('assets/bg-menu.jpg') + "') center 72%/cover no-repeat}" +
-    ".startWrap{background:url('" + asset('assets/bg-start.jpg') + "') center/100% 100% no-repeat}" +
-    ".coinStage{background:url('" + asset('assets/bg-coin2.png') + "') center/100% 100% no-repeat}" +
-    "#bgLayer{background:url('" + asset('assets/bg-board.png') + "') center/100% 100% no-repeat}" +
-    "#hotAce{background-image:url('" + asset('assets/die-ace.png') + "')}" +
+    ".menuWrap{background:url('" + asset(PATH.menu) + "') center 72%/cover no-repeat}" +
+    ".startWrap{background:url('" + asset(PATH.start) + "') center/100% 100% no-repeat}" +
+    ".coinStage{background:url('" + asset(PATH.coin) + "') center/100% 100% no-repeat}" +
+    "#bgLayer{background:url('" + asset(PATH.board) + "') center/100% 100% no-repeat}" +
+    "#hotAce{background-image:url('" + asset(PATH.ace) + "')}" +
     '</style>');
 });
 
@@ -1028,7 +1041,19 @@ const $ = id => document.getElementById(id);
 const S = { diff:'easy', battleDiff:'easy', mode:'free', stage:0, leyPref:'none',
             you:null, ai:null, attacker:0, round:1, ley:null, over:false, busy:false, second:null, lastHuman:null, lastAi:null };
 
-function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(id).classList.add('on'); }
+/* 姣忎釜鐢婚潰閰嶄竴寮犮€屽悓灞忓簳鍥俱€嶏紝鐢ㄤ簬濉厖闈?16:9 鏃剁殑榛戣竟 */
+const BLEED_SRC = {
+  's-menu':PATH.menu, 's-mode':PATH.menu,
+  's-codex':PATH.menu, 's-select':PATH.menu,
+  's-story':PATH.menu, 's-start':PATH.start,
+  's-coin':PATH.coin, 's-board':PATH.board,
+};
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  $(id).classList.add('on');
+  const b = document.getElementById('bleed');
+  if (b && BLEED_SRC[id]) b.style.backgroundImage = `url('${asset(BLEED_SRC[id])}')`;
+}
 const wait = ms => new Promise(r=>setTimeout(r,ms));
 
 function dieEl(d, opts){
