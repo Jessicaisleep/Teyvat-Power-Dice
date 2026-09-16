@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Jessicaisleep
+Copyright (c) 2026 提瓦特战力党 contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,29 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+================================================================================
+IMPORTANT — SCOPE OF THIS LICENSE
+================================================================================
+
+The MIT license above covers ONLY the source code written for this project:
+the HTML/CSS/JavaScript in 提瓦特战力党.html, and the tooling in tools/.
+
+It does NOT cover the bundled game assets. Specifically:
+
+  * Character portraits, board art, the coin-flip screen, the start screen,
+    the menu background, and the dice sprites are derived from
+    Genshin Impact / Honkai: Star Rail, which are the property of
+    COGNOSPHERE PTE. LTD. (HoYoverse). All rights to those assets remain
+    with their owner. They are included here for personal, non-commercial
+    use only.
+
+  * The web fonts (Noto Sans SC / Noto Serif SC, i.e. Source Han Sans /
+    Source Han Serif) are licensed separately under the SIL Open Font
+    License 1.1 by Adobe / Google, and are loaded from the Google Fonts CDN
+    rather than redistributed here.
+
+If you fork or redistribute this project, you must replace the game assets
+under assets/ with artwork you have the rights to use, or obtain permission
+from the rights holder. Do not present this project as an official product,
+and do not sell it.

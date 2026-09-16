@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>提瓦特战力党</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#f5c74a; --gold2:#ffe08a; --dim:#8e98b5;
+    --font-ui:"Noto Sans SC","Source Han Sans SC","Source Han Sans CN","思源黑体",
+              "PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    --font-title:"Noto Serif SC","Source Han Serif SC","Source Han Serif CN","思源宋体",
+                 "Songti SC",serif;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;overflow:hidden;background:#05070e;color:#eef1f8;
+    font-family:var(--font-ui)}
+  #app{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:min(100vw,177.7778vh);height:min(100vh,56.25vw);overflow:hidden;
+    background:url('assets/bg-menu.jpg') center 72%/cover no-repeat}
+  #app::after{content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 45%,rgba(6,10,20,.20) 0%,rgba(5,8,16,.80) 78%)}
+  .wrap{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:1.4cqh;container-type:size}
+  @supports not (container-type:size){ .wrap{gap:1.4vh} }
+  h1{margin:0;font-family:var(--font-title);font-size:6.4cqh;font-weight:900;
+    letter-spacing:.2em;color:var(--gold2);
+    text-shadow:0 0 3.4cqh rgba(245,199,74,.45),0 .5cqh 1cqh rgba(0,0,0,.7)}
+  .sub{font-size:1.25cqh;letter-spacing:.44em;color:var(--dim)}
+  .go{margin-top:3.2cqh;padding:1.7cqh 8cqh;border:none;border-radius:1.2cqh;
+    font-family:var(--font-title);font-size:2.6cqh;font-weight:900;letter-spacing:.24em;
+    background:linear-gradient(180deg,var(--gold2),var(--gold));color:#241c00;
+    cursor:pointer;text-decoration:none;display:inline-block;
+    box-shadow:0 .6cqh 0 #8a6508,0 0 4cqh rgba(245,199,74,.5);
+    transition:.14s}
+  .go:hover{filter:brightness(1.08);box-shadow:0 .6cqh 0 #8a6508,0 0 6cqh rgba(245,199,74,.75)}
+  .go:active{transform:translateY(.35cqh);box-shadow:0 .25cqh 0 #8a6508}
+  .links{margin-top:2.6cqh;display:flex;gap:2.6cqh;font-size:1.35cqh}
+  .links a{color:var(--dim);text-decoration:none;border-bottom:1px solid transparent;
+    padding-bottom:.2cqh;transition:.15s}
+  .links a:hover{color:var(--gold2);border-bottom-color:var(--gold)}
+  .tip{position:absolute;bottom:3cqh;left:0;right:0;text-align:center;
+    font-size:1.15cqh;color:#5d6785;line-height:1.7}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="wrap">
+    <h1>提瓦特战力党</h1>
+    <div class="sub">T E Y V A T &nbsp; P O W E R &nbsp; D I C E</div>
+    <a class="go" href="开始游戏.html">开 始 游 戏</a>
+    <div class="links">
+      <a href="开始游戏.html">自由对战 / 剧情模式</a>
+      <a href="LICENSE">授权说明</a>
+    </div>
+    <div class="tip">
+      单文件网页游戏 · 无需安装 · 无需联网<br>
+      如果按钮没有反应，直接打开 <b>开始游戏.html</b>
+    </div>
+  </div>
+</div>
+</body>
+</html>

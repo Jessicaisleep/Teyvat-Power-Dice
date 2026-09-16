@@ -1,0 +1,21 @@
+# 忽略系统与编辑器文件
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+*~
+
+# 忽略素材原始工程文件（体积大，且不参与发布）
+图片素材/
+
+# 忽略打包/校验产物
+out/
+*.log
+
+# 保留：
+#   提瓦特战力党.html        主文件
+#   提瓦特战力党.bundle.html  单文件发布版
+#   assets/                  运行时素材（20 个）
+#   tools/                   构建与校验脚本
+#   README.md  LICENSE
