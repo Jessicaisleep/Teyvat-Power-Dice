@@ -612,6 +612,7 @@ h1{font-family:var(--font-title);font-size:2.6cqh;margin:0 0 .2cqh;text-align:ce
 </head>
 <body>
 <div id="bleed"></div>
+<div id="app">
 
 <!-- ============ 入口 ============ -->
 <section class="screen on" id="s-menu">
@@ -1119,9 +1120,14 @@ function sidePt(human){ return human ? AVA_PT.bot : AVA_PT.top; }
 /* light beam from the attacker's avatar to the defender's avatar */
 function fireBeam(attackerHuman, attackerId){
   const a = sidePt(attackerHuman), b = sidePt(!attackerHuman);
-  const dx = (b.x-a.x)*16/100, dy = (b.y-a.y)*9/100;      // stage is 16:9
+  /* 舞台宽高比实测（窗口自适应时不再是 16:9）。
+     k = 宽/高，用来把「宽度的百分比」换算成 cqh（= 高度的百分比）。 */
+  const stEl = $('app');
+  const stR = stEl ? stEl.getBoundingClientRect() : { width: window.innerWidth, height: window.innerHeight };
+  const k = stR.height ? stR.width / stR.height : 16/9;
+  const dx = (b.x-a.x)*k/100, dy = (b.y-a.y)/100;          // 统一换成「舞台高度」单位
   const ang = Math.atan2(dy,dx)*180/Math.PI;
-  const len = Math.hypot(dx,dy)/16*100;                    // as % of stage width
+  const len = Math.hypot(dx,dy)/k*100;                     // as % of stage width
   const el = $('beam');
   el.style.left = a.x + '%';
   el.style.top  = a.y + '%';
@@ -1149,9 +1155,11 @@ function fireBeam(attackerHuman, attackerId){
   const atk = AVA_IMG[attackerId];
   ram.style.backgroundImage = (atk ? `url('${asset(atk)}'), ` : '') +
     'linear-gradient(180deg, #24304e 0%, #141a2b 100%)';
-  ram.style.left = a.x - 5.25 + '%';
-  ram.style.top  = a.y - 9.3 + '%';
-  ram.style.setProperty('--tx', ((b.x - a.x) * 16/9).toFixed(2) + 'cqh');
+  /* #ram 的尺寸是 10.3% × 17.8%（见 CSS），这里取精确一半，
+     ram 的中心才会正好落在攻方头像中心上；两个数字改动时要一起改。 */
+  ram.style.left = a.x - 5.15 + '%';
+  ram.style.top  = a.y - 8.9 + '%';
+  ram.style.setProperty('--tx', ((b.x - a.x) * k).toFixed(2) + 'cqh');
   ram.style.setProperty('--ty', ((b.y - a.y)).toFixed(2) + 'cqh');
   ram.classList.remove('go'); void ram.offsetWidth;
   ram.classList.add('go');
